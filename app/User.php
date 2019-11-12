@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name',
     ];
 
     /**
@@ -27,10 +27,28 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'created_at', 'updated_at'
     ];
 
+/**
+     * Append links attribute.
+     *
+     * @var array
+     */
+    protected $appends = ['_links'];
+    /**
+     * Set attributes links
+     *
+     * @return array
+     */
+    public function getLinksAttribute()
+    {
+        return [
+            'self' => app()->make('url')->to("/users/{$this->attributes['id']}")
+        ];
 
+        
+    }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

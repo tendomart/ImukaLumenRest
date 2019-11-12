@@ -11,6 +11,7 @@
 |
 */
 
+
 // API route group
 $router->group(['prefix' => 'api'], function () use ($router) {
     // Matches "/api/register
@@ -28,6 +29,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Matches "/api/users
     $router->get('users', 'UserController@allUsers');
+
+      //these are for deals controller
+      $router->post('deal','DealsController@createDeal');
+      $router->put('deal/{id}','DealsController@updateDeal');
+      $router->get('deal','DealsController@getAllDeals');
+      $router->delete('deal/{id}','DealsController@deleteDeal');
+      $router->get('deal','DealsController@index');
+    
  });
  
 
